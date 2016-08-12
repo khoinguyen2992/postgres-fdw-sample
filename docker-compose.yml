@@ -1,0 +1,24 @@
+postgres_origin:
+  container_name: postgres_origin
+  build: .
+  ports:
+    - "5432:5432"
+  environment:
+    POSTGRES_PASSWORD: 1234
+  links:
+    - postgres_remote
+    - mongodb_remote
+
+postgres_remote:
+  container_name: postgres_remote
+  image: postgres:9.5.3
+  ports:
+    - "5433:5432"
+  environment:
+    POSTGRES_PASSWORD: 1234
+
+mongodb_remote:
+  container_name: mongodb_remote
+  image: mongo:3.2.4
+  ports:
+    - "27017:27017"
